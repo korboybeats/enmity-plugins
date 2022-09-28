@@ -24,22 +24,7 @@ const Cut: Plugin = {
    ...manifest,
 
    onStart() {
-   let DeleteMessage = getByProps("deleteMessage")
-   this.can = Permissions.can.__original ?? Permissions.can;
-   const _this = this;
-
-   Patcher.after(Permissions, 'can', (_, [permission]) => {
-      if (permission === Constants.Permissions.MANAGE_MESSAGES) {
-         return true;
-      }
-   });
-   // talking area
-   // ok try pushing
-   // no idea if itll work, worth a try
-   // actually no wait
-   // dont push too late L
-   // lol ok
-   // ok try push now
+   let DeleteMessage = getByProps("deleteMessage") // try push LOL -- FOR LUA yeah lol relatable, its taking a lot of brain power to do // nah not really i was just coding in lua to help a friend recently and he doesnt e
       Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {
@@ -66,7 +51,7 @@ const Cut: Plugin = {
                      label="Cut Message"
                      onPress={() => {
                         Toasts.open({
-                           content: "Cut Message!",
+                           content: "Cut Message Successfully",
                            source: getIDByName("leaf"),
                      });
                         Clipboard.setString(originalMessage.content)
@@ -81,7 +66,7 @@ const Cut: Plugin = {
                      const logErr = () => {console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")}
 
                      addItem(finalLocation) ?
-                     this.can ? finalLocation.splice(addItem(finalLocation), 0, formElem) : logErr()
+                     Permissions.can(Constants.Permissions.MANAGE_MESSAGES) ? finalLocation.splice(addItem(finalLocation), 0, formElem) : logErr()
                      : logErr()
                });
             });

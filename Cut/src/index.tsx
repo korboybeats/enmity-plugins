@@ -36,11 +36,11 @@ const Cut: Plugin = {
    // talking area
    // ok try pushing
    // no idea if itll work, worth a try
-   //
-   //
-   //
-   //
-      this.can ? Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
+   // actually no wait
+   // dont push too late L
+   // lol ok
+   // ok try push now
+      Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {
                Patcher.after(instance, "default", (_, message, res) => {
@@ -77,13 +77,16 @@ const Cut: Plugin = {
                      }}
                      
                      />
+
+                     const logErr = () => {console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")}
+
                      addItem(finalLocation) ?
-                     finalLocation.splice(addItem(finalLocation), 0, formElem)
-                     : console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")
+                     this.can ? finalLocation.splice(addItem(finalLocation), 0, formElem) : logErr()
+                     : logErr()
                });
             });
          }
-      }) : ""
+      })
    },
    onStop() {
       Patcher.unpatchAll();

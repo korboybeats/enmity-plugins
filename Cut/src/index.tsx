@@ -69,11 +69,11 @@ const Cut: Plugin = {
 
                      let user = User.getCurrentUser()
                      addItem(finalLocation) ?
-                        originalMessage.author.username===user.username ?
-                           Permissions.can(Constants.Permissions.MANAGE_MESSAGES) 
-                              ? finalLocation.splice(addItem(finalLocation), 0, formElem) 
-                           : logErr()
-                        : logErr()
+                        originalMessage.author.username===user.username ? //my commit names are amazing
+                           finalLocation.splice(addItem(finalLocation), 0, formElem) 
+                        : Permissions.can(Constants.Permissions.MANAGE_MESSAGES) 
+                           ? finalLocation.splice(addItem(finalLocation), 0, formElem) 
+                        : logErr() // final commit cya
                      : logErr()
                });
             });

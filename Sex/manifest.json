@@ -1,0 +1,13 @@
+{
+   "name": "Sex",
+   "version": "1.0.0",
+   "description": "sex",
+   "authors": [
+      {
+         "name": "sex",
+         "id": "582594004479246343"
+      }
+   ],
+   "color": "#ff0069",
+   "sourceUrl": "https://raw.githubusercontent.com/spinfal/enmity-plugins/master/dist/AmongUs.js"
+}

@@ -50,7 +50,7 @@ const Cut: Plugin = {
                      onPress={() => {
                         Toasts.open({
                            content: "Cut Message!",
-                           source: { uri: Cut },
+                           source: getIDByName("leaf"),
                        });
                         Clipboard.setString(originalMessage.content)
 

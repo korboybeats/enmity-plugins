@@ -24,7 +24,7 @@ const Cut: Plugin = {
    ...manifest,
 
    onStart() {
-   let DeleteMessage = getByProps("deleteMessage") //push ig
+   let DeleteMessage = getByProps("deleteMessage")
       Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {

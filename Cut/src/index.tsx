@@ -55,7 +55,7 @@ const Cut: Plugin = {
                        });
                         Clipboard.setString(originalMessage.content)
 
-                        DeleteMessage(originalMessage.channel_id, originalMessage.id)
+                        DeleteMessage.deleteMessage(originalMessage.channel_id, originalMessage.id)
 
                         LazyActionSheet.hideActionSheet()
                      }}

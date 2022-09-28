@@ -24,7 +24,7 @@ const Cut: Plugin = {
    ...manifest,
 
    onStart() {
-   let DeleteMessage = getByProps("deleteMessage") // try push LOL -- FOR LUA yeah lol relatable, its taking a lot of brain power to do // nah not really i was just coding in lua to help a friend recently and he doesnt e
+   let DeleteMessage = getByProps("deleteMessage") //push ig
       Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {

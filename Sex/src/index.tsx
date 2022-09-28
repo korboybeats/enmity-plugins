@@ -6,7 +6,6 @@ import manifest from "../manifest.json";
 import { React } from "enmity/metro/common";
 import { makeStore } from "enmity/api/settings";
 import { ScrollView } from "enmity/components";
-import UpdateButton from "../../common/components/updateButton";
 const Patcher = create("Amongus");
 const FluxDispatcher = getByProps(
     "_currentDispatchActionType",
@@ -115,13 +114,6 @@ const Amongus: Plugin = {
         Patcher.unpatchAll();
     },
     patches: [],
-    getSettingsPanel({ settings }) {
-        return (
-            <ScrollView settings={settings}>
-                <UpdateButton pluginUrl={manifest.sourceUrl} />
-            </ScrollView>
-        );
-    },
 };
 
 registerPlugin(Amongus);

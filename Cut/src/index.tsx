@@ -45,7 +45,7 @@ const Cut: Plugin = {
                      const formElem = <FormRow
                      key="512"
                      leading = {<FormRow.Icon source={getIDByName("ic_wand")}/>}
-                     label="Cut"
+                     label="Cut Message"
                      onPress={() => {
                         Clipboard.setString(originalMessage.content)
                         const deleteEvent = {

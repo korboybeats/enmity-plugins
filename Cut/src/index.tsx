@@ -50,24 +50,15 @@ const Cut: Plugin = {
                         FluxDispatcher.dispatch(deleteEvent);
                      }}
                      />
-                     const addItem = (finalLocation: any, someRow: any) => {
-                        // find copy text button and get the array index of the object
-                        let findItem: any = finalLocation.find(e => e.props.message=='Copy Text')
-                        let indexOfButton = finalLocation.indexOf(findItem)
-                    
-                        // split the array into the items before and after the button
-                        let arrayBefore = finalLocation.splice(2, indexOfButton)
-                        let arrayAfter = finalLocation.splice(-1, indexOfButton)
-                    
-                        // add the new button
-                        arrayAfter.unshift(someRow)
-                        // add back the copy text button
-                        arrayBefore.push(findItem)
-                        return arrayBefore.concat(arrayAfter) // add the arrays together again
-                    }
-                  let arrayWithNewItem = addItem(finalLocation, formElem) // addItem returns an array
-
-                  finalLocation = arrayWithNewItem
+                     const addItem = (finalLocation: any) => {
+                        let findItem: any = finalLocation.find((e: any) => e.props.message=="Copy Text")
+                        if (!findItem) return false
+                        let indexOfButon = finalLocation.indexOf(findItem)
+                        return indexOfButon+1
+                     }
+                     addItem(finalLocation) ?
+                     finalLocation.splice(addItem(finalLocation), 0, formElem)
+                     : console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")
                });
             });
          }

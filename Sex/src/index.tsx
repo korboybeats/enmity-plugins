@@ -6,15 +6,15 @@ import manifest from "../manifest.json";
 import { React } from "enmity/metro/common";
 import { makeStore } from "enmity/api/settings";
 import { ScrollView } from "enmity/components";
-const Patcher = create("Amongus");
+const Patcher = create("sex");
 const FluxDispatcher = getByProps(
     "_currentDispatchActionType",
     "_subscriptions",
     "_waitQueue"
 );
-const amogus =
+const sex =
     "https://assets-prd.ignimgs.com/2020/09/15/among-us-button-1600131255112.jpg";
-const Amongus: Plugin = {
+const sexplugin: Plugin = {
     ...manifest,
     onStart() {
         const Settings = makeStore(this.name);
@@ -41,11 +41,11 @@ const Amongus: Plugin = {
             try {
                 attempt++;
                 console.log(
-                    `Amongus delayed start attempt ${attempt}/${attempts}.`
+                    `sex delayed start attempt ${attempt}/${attempts}.`
                 );
                 Toasts.open({
-                    content: `Amongus start attempt ${attempt}/${attempts}.`,
-                    source: { uri: amogus },
+                    content: `sex start attempt ${attempt}/${attempts}.`,
+                    source: { uri: sex },
                 });
                 const MessageCreate =
                     FluxDispatcher._actionHandlers._orderedActionHandlers.MESSAGE_CREATE.find(
@@ -84,26 +84,26 @@ const Amongus: Plugin = {
                         });
                     }
                 );
-                console.log(`Amongus delayed start successful.`);
+                console.log(`sex delayed start successful.`);
                 Toasts.open({
-                    content: `Amongus delayed start successful.`,
-                    source: { uri: amogus },
+                    content: `sex delayed start successful.`,
+                    source: { uri: sex },
                 });
             } catch {
                 if (attempt < attempts) {
                     console.warn(
-                        `Amongus failed to start. Trying again in ${attempt}0s.`
+                        `sex failed to start. Trying again in ${attempt}0s.`
                     );
                     Toasts.open({
-                        content: `Amongus failed to start trying again in ${attempt}0s.`,
-                        source: { uri: amogus },
+                        content: `sex failed to start trying again in ${attempt}0s.`,
+                        source: { uri: sex },
                     });
                     setTimeout(lateStartup, attempt * 10000);
                 } else {
-                    console.error(`Amongus failed to start. Giving up.`);
+                    console.error(`sex failed to start. Giving up.`);
                     Toasts.open({
-                        content: `Amongus failed to start. Giving up.`,
-                        source: { uri: amogus },
+                        content: `sex failed to start. Giving up.`,
+                        source: { uri: sex },
                     });
                 }
             }
@@ -116,4 +116,4 @@ const Amongus: Plugin = {
     patches: [],
 };
 
-registerPlugin(Amongus);
+registerPlugin(sexplugin);

@@ -45,7 +45,7 @@ const Cut: Plugin = {
                      );
                      const formElem = <FormRow
                      key="512"
-                     leading = {<FormRow.Icon source={getIDByName("ic_wand")}/>}
+                     leading = {<FormRow.Icon source={getIDByName("leaf")}/>}
                      label="Cut Message"
                      onPress={() => {
                         Toasts.open({

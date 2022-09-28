@@ -12,12 +12,14 @@ const [
    Clipboard,
    LazyActionSheet,
    MessageStore,
-   Permissions
+   Permissions,
+   User
 ] = bulk(
    filters.byProps('setString'),
    filters.byProps("openLazy", "hideActionSheet"),
    filters.byProps("getMessage", "getMessages"),
-   filters.byProps("getChannelPermissions")
+   filters.byProps("getChannelPermissions"),
+   filters.byProps('getCurrentUser')
 );
 
 const Cut: Plugin = {
@@ -65,8 +67,13 @@ const Cut: Plugin = {
 
                      const logErr = () => {console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")}
 
+                     let user = User.getCurrentUser()
                      addItem(finalLocation) ?
-                     Permissions.can(Constants.Permissions.MANAGE_MESSAGES) ? finalLocation.splice(addItem(finalLocation), 0, formElem) : logErr()
+                        originalMessage.author.username===user.username ?
+                           Permissions.can(Constants.Permissions.MANAGE_MESSAGES) 
+                              ? finalLocation.splice(addItem(finalLocation), 0, formElem) 
+                           : logErr()
+                        : logErr()
                      : logErr()
                });
             });

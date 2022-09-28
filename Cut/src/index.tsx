@@ -12,18 +12,17 @@ const [
    Clipboard,
    LazyActionSheet,
    MessageStore,
-   DeleteMessage
 ] = bulk(
    filters.byProps('setString'),
    filters.byProps("openLazy", "hideActionSheet"),
    filters.byProps("getMessage", "getMessages"),
-   filters.byProps("deleteMessage")
 );
-
+//hi do you have write perms yeah only text not terms
 const Cut: Plugin = {
    ...manifest,
 
    onStart() {
+      let DeleteMessage = getByProps("deleteMessage")
       Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {
@@ -55,7 +54,7 @@ const Cut: Plugin = {
                        });
                         Clipboard.setString(originalMessage.content)
 
-                        DeleteMessage.deleteMessage(originalMessage.channel_id, originalMessage.id)
+                        DeleteMessage.deleteMessage(`${originalMessage.channel_id}`, `${originalMessage.id}`)
 
                         LazyActionSheet.hideActionSheet()
                      }}

@@ -11,11 +11,13 @@ const Patcher = create('cut');
 const [
    Clipboard,
    LazyActionSheet,
-   ChannelStore
+   MessageStore,
+   DeleteMessage
 ] = bulk(
    filters.byProps('setString'),
    filters.byProps("openLazy", "hideActionSheet"),
-   filters.byProps("getChannel", "getDMFromUserId"),
+   filters.byProps("getMessage", "getMessages"),
+   filters.byProps("deleteMessage")
 );
 
 const Cut: Plugin = {
@@ -52,14 +54,9 @@ const Cut: Plugin = {
                            source: { uri: Cut },
                        });
                         Clipboard.setString(originalMessage.content)
-                        const deleteEvent = {
-                           type: "MESSAGE_DETELE",
-                           message: {
-                              ...originalMessage
-                           },
-                        };
-                        // dispatches the event
-                        FluxDispatcher.dispatch(deleteEvent);
+
+                        DeleteMessage(originalMessage.channel_id, originalMessage.id)
+
                         LazyActionSheet.hideActionSheet()
                      }}
                      
@@ -71,22 +68,6 @@ const Cut: Plugin = {
             });
          }
       })
-      const MessageStore = getByProps("getMessage", "getMessages")
-      const FluxDispatcher = getByProps(
-         "_currentDispatchActionType", 
-         "_subscriptions", 
-         "_actionHandlers", 
-         "_waitQueue"
-      )
-      // wake up flux message delete >:(
-      for (const handler of ["MESSAGE_DELETE"]) {
-         try {
-            FluxDispatcher.dispatch({
-                  type: handler,
-                  message: {},
-               });
-         } catch(err) { console.log(`[Cut Local Error ${err}]`);}
-      }
    },
    onStop() {
       Patcher.unpatchAll();

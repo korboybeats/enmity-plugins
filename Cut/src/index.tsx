@@ -47,6 +47,10 @@ const Cut: Plugin = {
                      leading = {<FormRow.Icon source={getIDByName("ic_wand")}/>}
                      label="Cut Message"
                      onPress={() => {
+                        Toasts.open({
+                           content: "Cut Message!",
+                           source: { uri: Cut },
+                       });
                         Clipboard.setString(originalMessage.content)
                         const deleteEvent = {
                            type: "MESSAGE_DETELE",

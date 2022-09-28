@@ -31,11 +31,19 @@ const Cut: Plugin = {
                      return res;
                   }
                   let finalLocation = res?.props?.children?.props?.children?.props?.children[1]
+                  const addItem = (finalLocation: any) => {
+                     let findItem: any = finalLocation.find((e: any) => e.props.message=="Copy Text")
+                     if (!findItem) return false
+                     let indexOfButon = finalLocation.indexOf(findItem)
+                     return indexOfButon+1
+                  }
+                  if(finalLocation[addItem(finalLocation)].key=='512') { return }
                   const originalMessage = MessageStore.getMessage(
                      message[0].message.channel_id,
                      message[0].message.id
                      );
                      const formElem = <FormRow
+                     key="512"
                      leading = {<FormRow.Icon source={getIDByName("ic_wand")}/>}
                      label="Cut"
                      onPress={() => {
@@ -48,14 +56,10 @@ const Cut: Plugin = {
                         };
                         // dispatches the event
                         FluxDispatcher.dispatch(deleteEvent);
+                        LazyActionSheet.hideActionSheet()
                      }}
+                     
                      />
-                     const addItem = (finalLocation: any) => {
-                        let findItem: any = finalLocation.find((e: any) => e.props.message=="Copy Text")
-                        if (!findItem) return false
-                        let indexOfButon = finalLocation.indexOf(findItem)
-                        return indexOfButon+1
-                     }
                      addItem(finalLocation) ?
                      finalLocation.splice(addItem(finalLocation), 0, formElem)
                      : console.log("Failed to find the 'Copy Text' property, meaning this is likely an embed, or an attachment with no context.")

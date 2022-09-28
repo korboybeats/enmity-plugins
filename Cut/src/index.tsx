@@ -2,7 +2,7 @@ import { FormRow } from 'enmity/components';
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { getIDByName } from 'enmity/api/assets';
 import { bulk, filters, getByProps } from 'enmity/metro';
-import { React, Toasts } from 'enmity/metro/common';
+import { React, Toasts, Constants } from 'enmity/metro/common';
 import { create } from 'enmity/patcher';
 import manifest from '../manifest.json';
 
@@ -12,18 +12,35 @@ const [
    Clipboard,
    LazyActionSheet,
    MessageStore,
+   Permissions
 ] = bulk(
    filters.byProps('setString'),
    filters.byProps("openLazy", "hideActionSheet"),
    filters.byProps("getMessage", "getMessages"),
+   filters.byProps("getChannelPermissions")
 );
-//hi do you have write perms yeah only text not terms
+
 const Cut: Plugin = {
    ...manifest,
 
    onStart() {
-      let DeleteMessage = getByProps("deleteMessage")
-      Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
+   let DeleteMessage = getByProps("deleteMessage")
+   this.can = Permissions.can.__original ?? Permissions.can;
+   const _this = this;
+
+   Patcher.after(Permissions, 'can', (_, [permission]) => {
+      if (permission === Constants.Permissions.MANAGE_MESSAGES) {
+         return true;
+      }
+   });
+   // talking area
+   // ok try pushing
+   // no idea if itll work, worth a try
+   //
+   //
+   //
+   //
+      this.can ? Patcher.before(LazyActionSheet, "openLazy", (_, [component, sheet], _res) => {
          if (sheet === "MessageLongPressActionSheet") {
             component.then((instance) => {
                Patcher.after(instance, "default", (_, message, res) => {
@@ -51,7 +68,7 @@ const Cut: Plugin = {
                         Toasts.open({
                            content: "Cut Message!",
                            source: getIDByName("leaf"),
-                       });
+                     });
                         Clipboard.setString(originalMessage.content)
 
                         DeleteMessage.deleteMessage(`${originalMessage.channel_id}`, `${originalMessage.id}`)
@@ -66,7 +83,7 @@ const Cut: Plugin = {
                });
             });
          }
-      })
+      }) : ""
    },
    onStop() {
       Patcher.unpatchAll();

@@ -1,27 +1,27 @@
-import { FormRow, FormInput, StyleSheet } from 'enmity/components';
+import { FormRow, FormInput, StyleSheet, FormSection, View } from 'enmity/components';
 import { SettingsStore } from 'enmity/api/settings';
 import { React } from 'enmity/metro/common';
+import { customText } from '../index';
 
 const styles = StyleSheet.create({
-    plsWhiteText: {
-      alignItems: "center",
-      backgroundColor: "#FFFFFF",
-      padding: 10
-    }
+    container: {
+        flex: 1,
+        padding: 16,
+      },
   });
 
 interface SettingsProps {
    settings: SettingsStore;
 }
-
+let setLinkVal;
 export default ({ settings }: SettingsProps) => {
-   return <FormRow
-      label='Prefix'
-      trailing={
-        <FormInput
-        style={styles.plsWhiteText}
-        placeholder="Prefix"
-        />
-      }
-   />;
-};
+   return (
+    <View
+    style={styles.container}
+    >
+    <FormInput
+        onChange={v => setLinkVal(v)}
+        title='Link Text'
+    />
+  </View>
+)};

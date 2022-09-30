@@ -6,13 +6,14 @@ import manifest from '../manifest.json';
 
 import Settings from './components/Settings';
 
+let customText = "";
+
 const Patcher = create('ChangeDiscordLink');
 
 const ChangeDiscordLink: Plugin = {
    ...manifest,
 
    onStart() {      
-      let customText = "rosie";
       
       Patcher.before(Messages, "sendMessage", (self, args, orig) => {
         const content = args[1]["content"];
@@ -29,5 +30,5 @@ const ChangeDiscordLink: Plugin = {
       return <Settings settings={settings} />;
    }
 };
-
+export {customText}
 registerPlugin(ChangeDiscordLink);

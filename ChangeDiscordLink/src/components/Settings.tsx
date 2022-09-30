@@ -1,4 +1,4 @@
-import { FormRow, FormInput, StyleSheet, FormSection, View } from 'enmity/components';
+import {FormInput, StyleSheet, View } from 'enmity/components';
 import { SettingsStore } from 'enmity/api/settings';
 import { React } from 'enmity/metro/common';
 import { customText } from '../index';
@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
 interface SettingsProps {
    settings: SettingsStore;
 }
-let setLinkVal;
+
 export default ({ settings }: SettingsProps) => {
    return (
     <View
     style={styles.container}
     >
     <FormInput
-        onChange={v => setLinkVal(v)}
+        onChange={v => customText}
         title='Link Text'
     />
   </View>

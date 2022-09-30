@@ -1,4 +1,4 @@
-import { FormRow, TextInput, StyleSheet } from 'enmity/components';
+import { FormRow, FormInput, StyleSheet } from 'enmity/components';
 import { SettingsStore } from 'enmity/api/settings';
 import { React } from 'enmity/metro/common';
 
@@ -18,7 +18,7 @@ export default ({ settings }: SettingsProps) => {
    return <FormRow
       label='Prefix'
       trailing={
-        <TextInput
+        <FormInput
         style={styles.plsWhiteText}
         placeholder="Prefix"
         />

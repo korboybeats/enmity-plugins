@@ -14,11 +14,8 @@ const ChangeDiscordLink: Plugin = {
       Patcher.before(Messages, "sendMessage", (_, args, orig) => {
          let msg = args[1]["content"];
          if (!msg.includes("discord.com/channels/")) return orig(...args);
-     
          const newMessage = msg.replace("discord.com/channels/", customText + ".discord.com/channels/")
-         
          args[1]["content"] = newMessage;
-     
          return orig(...args);
      });
    },

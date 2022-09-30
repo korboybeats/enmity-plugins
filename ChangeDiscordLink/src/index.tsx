@@ -1,9 +1,9 @@
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { create } from 'enmity/patcher';
-import { Messages } from "enmity/metro/common";
 import manifest from '../manifest.json';
 
 const Patcher = create('ChangeDiscordLink');
+const Messages = window.enmity.modules.common.Messages;
 
 const ChangeDiscordLink: Plugin = {
    ...manifest,

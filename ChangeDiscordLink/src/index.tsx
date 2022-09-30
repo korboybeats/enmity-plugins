@@ -11,13 +11,15 @@ const ChangeDiscordLink: Plugin = {
    ...manifest,
 
    onStart() {
-      Patcher.before(Messages, "sendMessage", (_, args, orig) => {
-         let msg = args[1]["content"];
-         if (!msg.includes("discord.com/channels/")) return orig(...args);
-         let newMessage = msg.replace("discord.com/channels/", customText + ".discord.com/channels/")
-         args[1]["content"] = newMessage;
-         return orig(...args);
-     });
+      const customText = "rosie";
+      
+      Patcher.before(Messages, "sendMessage", (self, args, orig) => {
+        const content = args[1]["content"];
+      
+        if(!content.includes("discord.com/channels")) return;
+      
+        args[1]["content"] = content.replace("discord.com/channels", customText + ".discord.com/channels");
+      });
    },
    onStop() {
       Patcher.unpatchAll();

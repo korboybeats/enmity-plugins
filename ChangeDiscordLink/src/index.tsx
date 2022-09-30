@@ -1,21 +1,18 @@
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { create } from 'enmity/patcher';
 import { React, Messages } from 'enmity/metro/common';
+import { get } from 'enmity/api/settings';
 import manifest from '../manifest.json';
-
-
 import Settings from './components/Settings';
 
-let customText = "";
-
+get("ChangeDiscordLink", "customText", "")
 const Patcher = create('ChangeDiscordLink');
-
 const ChangeDiscordLink: Plugin = {
    ...manifest,
 
    onStart() {      
-      
       Patcher.before(Messages, "sendMessage", (self, args, orig) => {
+      let customText = get('ChangeDiscordLink', "urlPrefix", "stable")
         const content = args[1]["content"];
       
         if(!content.includes("discord.com/channels")) return;
@@ -30,5 +27,4 @@ const ChangeDiscordLink: Plugin = {
       return <Settings settings={settings} />;
    }
 };
-export {customText}
 registerPlugin(ChangeDiscordLink);

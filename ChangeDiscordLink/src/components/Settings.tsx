@@ -1,6 +1,14 @@
-import { FormRow, FormSwitch, TextInput } from 'enmity/components';
+import { FormRow, TextInput, StyleSheet } from 'enmity/components';
 import { SettingsStore } from 'enmity/api/settings';
 import { React } from 'enmity/metro/common';
+
+const styles = StyleSheet.create({
+    plsWhiteText: {
+      alignItems: "center",
+      backgroundColor: "#FFFFFF",
+      padding: 10
+    }
+  });
 
 interface SettingsProps {
    settings: SettingsStore;
@@ -11,6 +19,7 @@ export default ({ settings }: SettingsProps) => {
       label='Prefix'
       trailing={
         <TextInput
+        style={styles.plsWhiteText}
         placeholder="Prefix"
         />
       }

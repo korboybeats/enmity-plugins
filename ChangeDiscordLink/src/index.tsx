@@ -1,9 +1,7 @@
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { create } from 'enmity/patcher';
-import { getByProps } from "enmity/modules";
+import { Messages } from "enmity/metro/common";
 import manifest from '../manifest.json';
-
-const sendMessage = getByProps("sendMessage")
 
 const Patcher = create('ChangeDiscordLink');
 
@@ -13,8 +11,13 @@ const ChangeDiscordLink: Plugin = {
    ...manifest,
 
    onStart() {
-    Patcher.before(sendMessage, "sendMessage", (_, args, __) => {
-      args[0].content = args[0].content.replaceAll("discord.com/channels/", customText + ".discord.com/channels/")
+    Patcher.before(Messages, "sendMessage", (notMessage, theMessage, alsoNotMessage) => {
+      let message = theMessage[1]["content"];
+      let newMessage;
+      if (message.includes("discord.com/channels/")) {
+         newMessage == message.replace("discord.com/channels/", customText + ".discord.com/channels/")
+      }
+      theMessage[1]["content"] = newMessage;
     });
    },
    onStop() {

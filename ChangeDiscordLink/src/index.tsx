@@ -5,7 +5,7 @@ import manifest from '../manifest.json';
 
 const Patcher = create('ChangeDiscordLink');
 
-let customText = "you-are-sus"; //for now, edit this here :)
+let customText = "rosie";
 
 const ChangeDiscordLink: Plugin = {
    ...manifest,

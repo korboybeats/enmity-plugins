@@ -5,12 +5,10 @@ import manifest from '../manifest.json';
 
 const Patcher = create('ChangeDiscordLink');
 
-let customText = "rosie";
-
 const ChangeDiscordLink: Plugin = {
    ...manifest,
 
-   onStart() {
+   onStart() {      
       const customText = "rosie";
       
       Patcher.before(Messages, "sendMessage", (self, args, orig) => {

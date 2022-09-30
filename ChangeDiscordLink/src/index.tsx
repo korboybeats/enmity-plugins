@@ -15,7 +15,7 @@ const ChangeDiscordLink: Plugin = {
       let message = theMessage[1]["content"];
       let newMessage;
       if (message.includes("discord.com/channels/")) {
-         newMessage == message.replace("discord.com/channels/", customText + ".discord.com/channels/")
+         newMessage = message.replace("discord.com/channels/", customText + ".discord.com/channels/")
       }
       theMessage[1]["content"] = newMessage;
     });

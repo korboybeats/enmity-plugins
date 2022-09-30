@@ -1,0 +1,11 @@
+{
+   "name": "ChangeDiscordText",
+   "version": "0.0.1",
+   "description": "Port of that one powercord plugin lol",
+   "authors": [
+      {
+         "name": "rosie",
+         "id": "582594004479246343"
+      }
+   ]
+}

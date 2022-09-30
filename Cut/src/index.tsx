@@ -1,3 +1,9 @@
+//TO DO:
+//1. fix permission shit
+//2. bug hunt
+//3. settings screen (optional toasts)
+//4. release
+
 import { FormRow } from 'enmity/components';
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { getIDByName } from 'enmity/api/assets';
@@ -69,11 +75,11 @@ const Cut: Plugin = {
 
                      let user = User.getCurrentUser()
                      addItem(finalLocation) ?
-                        originalMessage.author.username===user.username ? //my commit names are amazing
+                        originalMessage.author.username===user.username ?
                            finalLocation.splice(addItem(finalLocation), 0, formElem) 
                         : Permissions.can(Constants.Permissions.MANAGE_MESSAGES) 
                            ? finalLocation.splice(addItem(finalLocation), 0, formElem) 
-                        : logErr() // final commit cya
+                        : logErr()
                      : logErr()
                });
             });

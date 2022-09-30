@@ -17,19 +17,13 @@ const ChangeDiscordLink: Plugin = {
             let format1 = text.split(" ").map(e => e.toLowerCase()).join('-')
             let format2: string[] = [];
             let alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890-_'
-            format1.includes(alphabet) 
-                ? []
-                : format1.split('').map((char: string)=> {
-                    if (!alphabet.includes(char)) return format2.push('-')
-                    return format2.push(char)
-        
-                }).join('')
-        
+            format1.split('').map((char: string)=> {
+                if (!alphabet.includes(char)) return format2.push('-')
+                return format2.push(char)
+            })
             return format2.join('')
-            
         }
-        
-        console.log(formatString("Hello World ?a?")) // hello-world--a-
+        console.log(formatString("Hello World ?a?"))
 
          const content = args[1]["content"];
          if(!content.includes("discord.com/channels")) return;
